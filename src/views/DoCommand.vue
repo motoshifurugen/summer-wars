@@ -2,6 +2,9 @@
     <div class="submitted">
       <div class="background-image" :style="{ backgroundImage: `url(${currentImage})` }"></div>
     <h1 v-if="showMessage" class="message-header">{{ getMessageText() }}</h1>
+    <div v-if="showMessage" class="back-button-container">
+      <router-link to="/" class="back-button btn-circle-flat">時を戻す</router-link>
+    </div>
     </div>
   </template>
   
@@ -85,11 +88,11 @@
 
   .message-header {
   font-size: 24px;
-  background-color: rgba(255, 255, 255, 0.8); /* メッセージの背景色（透明度を上げる） */
-  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.8); /* メッセージの背景色（透明度を上げる） */
   border-radius: 5px;
   display: inline-block;
-  padding: 1em;
+  padding: 1.5em;
+  color: white;
 }
   
   .background-image {
@@ -103,5 +106,29 @@
     height: 100%;
     z-index: -1;
   }
+  .back-button-container {
+  position: absolute;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.btn-circle-flat {
+  display: inline-block;
+  text-decoration: none;
+  background: #F06292;
+  color: #FFF;
+  width: 120px;
+  height: 120px;
+  line-height: 120px;
+  border-radius: 50%;
+  text-align: center;
+  overflow: hidden;
+  transition: .4s;
+  font-size: 1.25em;
+}
+
+.btn-circle-flat:hover {
+  background: #E91E63;
+}
   </style>
   
