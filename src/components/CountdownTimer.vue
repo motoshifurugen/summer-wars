@@ -14,9 +14,9 @@
           <!-- パスワード入力フォーム -->
           <form @submit.prevent="submitForm" @keyup.enter="submitForm" class="password-form">
             <input
-              type="password"
+              type="number"
               v-model="password"
-              placeholder="パスワードを入力してください"
+              placeholder="パスコードを入力してください"
               class="password-input"
             />
           </form>
@@ -37,19 +37,31 @@
         password: '', // 入力されたパスワードを保持するデータ
       };
     },
+    computed: {
+    correctPassword() {
+      return this.$store.state.session.password;
+    },
+  },
     mounted() {
+      this.$store.dispatch('generatePassword'); // 新しいパスワードを生成し、セッションに保存
       this.$root.popupText = "ワールドクロックが壊れている！急げ！";
       this.startCountdown();
   
       // 5秒後にポップアップを表示
       setTimeout(() => {
         this.showPopup = true;
-        this.$root.popupText = "締め出された！暗号を解いてくれ...";
+        this.$root.popupText = "締め出された！パスコードは3桁の数字らしい...";
       }, 5000);
     },
     methods: {
         submitForm() {
-    this.$router.push('/submitted'); // ページ遷移
+          if (this.password === this.correctPassword) {
+        this.$router.push('/submitted'); // パスワードが一致したらページ遷移
+      } else if (this.password && String(this.password).length !== 3 || isNaN(this.password)) {
+          alert("3桁の数字を入力してください。");
+      } else {
+        alert(this.correctPassword);
+      }
   },
       startCountdown() {
         this.timer = setInterval(() => {
@@ -154,8 +166,9 @@
 .password-input {
   padding: 20px;
   font-size: 1.5em;
-  width: 80%; /* 幅を広げる */
+  width: 50%; /* 幅を広げる */
   border: 8px solid grey;
+  text-align: center;
 }
 
 .submit-button {
