@@ -30,6 +30,7 @@ export default {
     };
   },
   mounted() {
+    this.$root.popupText = "「よろしくお願いしまぁぁぁす！」と叫びながらエンターキーを押すんだ！";
     this.randomMessage = this.getRandomMessage();
     document.addEventListener('keydown', this.handleKeyDown);
   },
@@ -46,6 +47,7 @@ export default {
       // フォームの送信処理を実行（例としてコンソールに出力する）
       console.log(`Answer submitted: ${answer+this.randomMessage}`);
       // 次ページに遷移
+      this.$root.popupText = "SubmittedFormからのテキストです。";
       this.$router.push({ name: 'DoCommand', query: { message: this.randomMessage } });
     },
     handleKeyDown() {
