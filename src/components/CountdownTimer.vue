@@ -14,9 +14,9 @@
           <!-- パスワード入力フォーム -->
           <form @submit.prevent="submitForm" @keyup.enter="submitForm" class="password-form">
             <input
-              type="password"
+              type="number"
               v-model="password"
-              placeholder="パスワードを入力してください"
+              placeholder="パスコードを入力してください"
               class="password-input"
             />
           </form>
@@ -35,22 +35,64 @@
         timeLeft: 60000, // ミリ秒のカウントダウン時間 (60秒 × 1000ミリ秒)
         showPopup: false, // ポップアップを表示するかどうかのフラグ
         password: '', // 入力されたパスワードを保持するデータ
+        feedbackMessage: '', // パスワードのフィードバックメッセージ
       };
     },
+    computed: {
+    correctPassword() {
+      return this.$store.state.session.password;
+    },
+  },
     mounted() {
+      this.$store.dispatch('generatePassword'); // 新しいパスワードを生成し、セッションに保存
       this.$root.popupText = "ワールドクロックが壊れている！急げ！";
       this.startCountdown();
   
       // 5秒後にポップアップを表示
       setTimeout(() => {
         this.showPopup = true;
-        this.$root.popupText = "締め出された！暗号を解いてくれ...";
+        this.$root.popupText = "締め出された！パスコードは重複のない3桁の数字らしい...";
       }, 5000);
     },
     methods: {
         submitForm() {
-    this.$router.push('/submitted'); // ページ遷移
+        if (this.password === this.correctPassword) {
+        this.$router.push('/submitted'); // パスワードが一致したらページ遷移
+      } else if (!(this.password) || this.password && String(this.password).length !== 3 || isNaN(this.password)) {
+          alert("3桁の数字を入力してください。");
+      } else {
+        const feedback = this.getFeedback(this.password);
+        this.feedbackMessage = feedback;
+        alert(this.feedbackMessage);
+        if (feedback === '3EAT - 0BITEです。ロックを解除しました。') {
+          this.$router.push('/submitted'); // ページ遷移
+        }
+      }
   },
+  getFeedback(inputPassword) {
+    // 入力されたパスワードに同じ数字が使われているかをチェック
+    const digits = new Set(inputPassword.toString());
+      if (digits.size !== 3) {
+        return '重複のない3桁の数字を入力してください';
+      }
+      let eat = 0;
+      let bite = 0;
+      let message = "";
+      for (let i = 0; i < 3; i++) {
+        if (String(inputPassword)[i] === String(this.correctPassword)[i]) {
+          eat++;
+        } else if (String(this.correctPassword).includes(String(inputPassword)[i])) {
+          bite++;
+        }
+      }
+      message = `${eat}EAT - ${bite}BITEです。`;
+      if (eat == 3) {
+        message += "ロックを解除しました。";
+      } else if (eat == 0 && bite == 0) {
+        message += "やりましたね。";
+      }
+      return message;
+    },
       startCountdown() {
         this.timer = setInterval(() => {
           if (this.timeLeft > 0) {
@@ -154,8 +196,9 @@
 .password-input {
   padding: 20px;
   font-size: 1.5em;
-  width: 80%; /* 幅を広げる */
+  width: 50%; /* 幅を広げる */
   border: 8px solid grey;
+  text-align: center;
 }
 
 .submit-button {
