@@ -1,16 +1,16 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import SubmittedForm from '../views/SubmittedForm.vue'; // Submittedコンポーネントが存在する場所に適切なパスを指定してください
-import CountdownTimer from '../components/CountdownTimer.vue';
+import WorldClock from '../components/WorldClock.vue';
 import DoCommand from '../views/DoCommand.vue';
 
 const routes = [
-{
-    path: '/',
-    name: 'CountdownTimer',
-    component: CountdownTimer,
-},
   {
-    path: '/submitted',
+    path: '/',
+    name: 'WorldClock',
+    component: WorldClock,
+  },
+  {
+    path: '/masaka',
     name: 'SubmittedForm',
     component: SubmittedForm,
   },

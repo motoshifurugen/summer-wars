@@ -1,8 +1,6 @@
 <template>
   <div class="submitted-form">
-    <!-- 背景画像を設定 -->
     <div class="background-image"></div>
-    <!-- フォーム -->
     <div class="form-container">
       <h1>以下のコードを実行します。よろしいですか？</h1>
       <h1 style="color:grey">{{ randomMessage }}</h1>
@@ -30,7 +28,7 @@ export default {
     };
   },
   mounted() {
-    this.$root.popupText = "「よろしくお願いしまぁぁぁす！」と叫びながらエンターキーを押すんだ！";
+    this.$root.popupText = "まさか、「よろしくお願いしまぁぁぁす！」なんて言わないだろうな...？";
     this.randomMessage = this.getRandomMessage();
     document.addEventListener('keydown', this.handleKeyDown);
   },
@@ -43,11 +41,7 @@ export default {
       const randomIndex = Math.floor(Math.random() * this.messages.length);
       return this.messages[randomIndex];
     },
-    submitForm(answer) {
-      // フォームの送信処理を実行（例としてコンソールに出力する）
-      console.log(`Answer submitted: ${answer+this.randomMessage}`);
-      // 次ページに遷移
-      this.$root.popupText = "SubmittedFormからのテキストです。";
+    submitForm() {
       this.$router.push({ name: 'DoCommand', query: { message: this.randomMessage } });
     },
     handleKeyDown() {
@@ -71,7 +65,6 @@ export default {
   height: 100vh;
   width: 100%;
 }
-
 .form-container {
   background-color: rgba(255, 255, 255, 0.8); /* フォームの背景色（透明度を上げる） */
   padding: 20px;
@@ -82,25 +75,21 @@ export default {
   width: 100%;
   height: 20%;
 }
-
 h1 {
   text-align: center;
 }
-
 .button-container {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 20px;
 }
-
 .yes-button,
 .no-button {
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
 }
-
 .yes-button {
   background-color: #007bff;
   color: white;
@@ -108,7 +97,6 @@ h1 {
   border-radius: 5px;
   margin-right: 10px;
 }
-
 .no-button {
   background-color: #dc3545;
   color: white;
