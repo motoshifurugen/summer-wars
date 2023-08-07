@@ -35,6 +35,7 @@
         timeLeft: 60000, // ミリ秒のカウントダウン時間 (60秒 × 1000ミリ秒)
         showPopup: false, // ポップアップを表示するかどうかのフラグ
         password: '', // 入力されたパスワードを保持するデータ
+        feedbackMessage: '', // パスワードのフィードバックメッセージ
       };
     },
     computed: {
@@ -50,19 +51,48 @@
       // 5秒後にポップアップを表示
       setTimeout(() => {
         this.showPopup = true;
-        this.$root.popupText = "締め出された！パスコードは3桁の数字らしい...";
+        this.$root.popupText = "締め出された！パスコードは重複のない3桁の数字らしい...";
       }, 5000);
     },
     methods: {
         submitForm() {
-          if (this.password === this.correctPassword) {
+        if (this.password === this.correctPassword) {
         this.$router.push('/submitted'); // パスワードが一致したらページ遷移
-      } else if (this.password && String(this.password).length !== 3 || isNaN(this.password)) {
+      } else if (!(this.password) || this.password && String(this.password).length !== 3 || isNaN(this.password)) {
           alert("3桁の数字を入力してください。");
       } else {
-        alert(this.correctPassword);
+        const feedback = this.getFeedback(this.password);
+        this.feedbackMessage = feedback;
+        alert(this.feedbackMessage);
+        if (feedback === '3EAT - 0BITEです。ロックを解除しました。') {
+          this.$router.push('/submitted'); // ページ遷移
+        }
       }
   },
+  getFeedback(inputPassword) {
+    // 入力されたパスワードに同じ数字が使われているかをチェック
+    const digits = new Set(inputPassword.toString());
+      if (digits.size !== 3) {
+        return '重複のない3桁の数字を入力してください';
+      }
+      let eat = 0;
+      let bite = 0;
+      let message = "";
+      for (let i = 0; i < 3; i++) {
+        if (String(inputPassword)[i] === String(this.correctPassword)[i]) {
+          eat++;
+        } else if (String(this.correctPassword).includes(String(inputPassword)[i])) {
+          bite++;
+        }
+      }
+      message = `${eat}EAT - ${bite}BITEです。`;
+      if (eat == 3) {
+        message += "ロックを解除しました。";
+      } else if (eat == 0 && bite == 0) {
+        message += "やりましたね。";
+      }
+      return message;
+    },
       startCountdown() {
         this.timer = setInterval(() => {
           if (this.timeLeft > 0) {
