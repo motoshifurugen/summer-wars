@@ -30,7 +30,7 @@ export default {
     };
   },
   mounted() {
-    this.$root.popupText = "「よろしくお願いしまぁぁぁす！」と叫びながらエンターキーを押すんだ！";
+    this.$root.popupText = "まさか、「よろしくお願いしまぁぁぁす！」なんて言わないだろうな...？";
     this.randomMessage = this.getRandomMessage();
     document.addEventListener('keydown', this.handleKeyDown);
   },
