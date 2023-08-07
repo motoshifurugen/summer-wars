@@ -43,11 +43,7 @@ export default {
       const randomIndex = Math.floor(Math.random() * this.messages.length);
       return this.messages[randomIndex];
     },
-    submitForm(answer) {
-      // フォームの送信処理を実行（例としてコンソールに出力する）
-      console.log(`Answer submitted: ${answer+this.randomMessage}`);
-      // 次ページに遷移
-      this.$root.popupText = "SubmittedFormからのテキストです。";
+    submitForm() {
       this.$router.push({ name: 'DoCommand', query: { message: this.randomMessage } });
     },
     handleKeyDown() {

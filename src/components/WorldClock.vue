@@ -57,7 +57,7 @@
     methods: {
         submitForm() {
         if (this.password === this.correctPassword) {
-        this.$router.push('/submitted'); // パスワードが一致したらページ遷移
+        this.$router.push('/masaka'); // パスワードが一致したらページ遷移
       } else if (!(this.password) || this.password && String(this.password).length !== 3 || isNaN(this.password)) {
           alert("3桁の数字を入力してください。");
       } else {
@@ -65,7 +65,7 @@
         this.feedbackMessage = feedback;
         alert(this.feedbackMessage);
         if (feedback === '3EAT - 0BITEです。ロックを解除しました。') {
-          this.$router.push('/submitted'); // ページ遷移
+          this.$router.push('/masaka'); // ページ遷移
         }
       }
   },
