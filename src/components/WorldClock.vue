@@ -3,15 +3,12 @@
     <div class="timer-text">
       {{ formatTime(timeLeft) }}
     </div>
-    <!-- ポップアップの要素 -->
     <transition name="popup-slide">
       <div v-if="showPopup" class="popup">
         <div class="popup-content">
-          <!-- 画像を背景として表示 -->
           <div class="popup-image-container">
             <img src="/images/caution.jpg" alt="Popup Image" class="popup-image" />
           </div>
-          <!-- パスワード入力フォーム -->
           <form @submit.prevent="submitForm" @keyup.enter="submitForm" class="password-form">
             <input
               type="number"

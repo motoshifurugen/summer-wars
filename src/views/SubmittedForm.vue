@@ -1,8 +1,6 @@
 <template>
   <div class="submitted-form">
-    <!-- 背景画像を設定 -->
     <div class="background-image"></div>
-    <!-- フォーム -->
     <div class="form-container">
       <h1>以下のコードを実行します。よろしいですか？</h1>
       <h1 style="color:grey">{{ randomMessage }}</h1>
