@@ -1,15 +1,12 @@
-<!-- src/App.vue -->
-
 <template>
   <div class="app">
-    <!-- ここに他のコンテンツを追加する場合は、その前後にタイマーを配置できます -->
     <img src="/images/sakuma.png" class="left-top-image" />
     <div class="sakuma-popup-container">
       <div class="sakuma-popup-content">
         <p>{{ popupText }}</p>
       </div>
     </div>
-    <router-view :popupText="popupText"></router-view> <!-- ここにrouter-viewを追加 -->
+    <router-view :popupText="popupText"></router-view>
   </div>
 </template>
 
@@ -51,7 +48,6 @@ export default {
   border: 1px solid grey;
   width: 65%;
 }
-
 .sakuma-popup-content {
   text-align: center;
 }

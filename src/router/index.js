@@ -4,11 +4,11 @@ import WorldClock from '../components/WorldClock.vue';
 import DoCommand from '../views/DoCommand.vue';
 
 const routes = [
-{
+  {
     path: '/',
     name: 'WorldClock',
     component: WorldClock,
-},
+  },
   {
     path: '/masaka',
     name: 'SubmittedForm',
