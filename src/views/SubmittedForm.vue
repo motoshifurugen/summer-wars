@@ -1,6 +1,7 @@
 <template>
   <div class="submitted-form">
     <div class="background-image"></div>
+    <div class="overlay-image"></div> 
     <div class="form-container">
       <h1>以下のコードを実行します。よろしいですか？</h1>
       <h1 style="color:grey">{{ randomMessage }}</h1>
@@ -59,16 +60,41 @@ export default {
 
 <style>
 .submitted-form {
-  /* 背景画像の設定 */
-  background-image: url('/public/images/worldclock.png'); /* 画像ファイルのパスを指定する */
-  background-size: cover;
-  background-position: center;
-  /* 以下はフォームのスタイルに関するCSS */
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   width: 100%;
+  position: relative;
+}
+.background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/public/images/worldclock.png');
+  background-size: cover;
+  background-position: center;
+}
+.overlay-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/public/images/yoroshiku.jpeg');
+  background-size: cover;
+  background-position: center;
+  animation: blink 2s infinite;
+}
+@keyframes blink {
+  0%, 100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 0;
+  }
 }
 .form-container {
   background-color: rgba(255, 255, 255, 0.8); /* フォームの背景色（透明度を上げる） */
