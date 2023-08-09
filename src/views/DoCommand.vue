@@ -9,9 +9,13 @@
 </template>
   
 <script>
+import { mapState } from 'vuex';
 export default {
-  props: {
-    message: String,
+  computed: {
+    ...mapState({
+      session: state => state.session,
+      message: state => state.message,
+    }),
   },
   data() {
     return {

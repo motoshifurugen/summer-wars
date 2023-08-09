@@ -5,10 +5,14 @@ const store = createStore({
     session: {
       password: '',
     },
+    message: '',
   },
   mutations: {
     setPassword(state, password) {
       state.session.password = password;
+    },
+    setMessage(state, message) {
+      state.message = message;
     },
   },
   actions: {
@@ -37,6 +41,9 @@ const store = createStore({
       }
       // 生成したパスワードをセッションに保存
       commit('setPassword', password);
+    },
+    updateMessage({ commit }, message) {
+      commit('setMessage', message);
     },
   },
 });

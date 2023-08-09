@@ -18,7 +18,6 @@ const routes = [
     path: '/do',
     name: 'DoCommand',
     component: DoCommand,
-    props: (route) => ({ message: route.query.message || '' }),
   },
 ];
 
