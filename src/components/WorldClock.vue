@@ -22,8 +22,9 @@
     </transition>
   </div>
 </template>
-  
+
 <script>
+import { mapMutations } from 'vuex';
 export default {
   data() {
     return {
@@ -53,6 +54,7 @@ export default {
     },
   },
   methods: {
+    ...mapMutations(['setMessage']), // setMessageミューテーションをマッピング
     submitForm() {
       if (this.password === this.correctPassword) {
         this.$router.push('/masaka'); // パスワードが一致したらページ遷移
@@ -97,6 +99,9 @@ export default {
           this.timeLeft -= 10; // 10ミリ秒ごとに減らす
         } else {
           clearInterval(this.timer);
+          // タイマーが0になったときの処理を追加
+          this.setMessage('timeup'); // メッセージを設定
+          this.$router.push({ name: 'DoCommand' }); // DoCommand.vue に遷移
         }
       }, 10);
     },
