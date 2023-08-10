@@ -57,6 +57,9 @@ export default {
             return 'コマンドの出力をfile.confというファイルに上書きしました。';
         case '^mistake^correction':
             return '"mistake"を"correction"に置換してコマンドを実行しました。';
+        case 'timeup':
+            this.$root.popupText = "くそ！...間に合わなかった。";
+            return '時間切れです。';
         default:
           this.$root.popupText = "お前、何者だ？";
           return '不明なコマンドが送信されました。';
