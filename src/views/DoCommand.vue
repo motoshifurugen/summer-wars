@@ -1,6 +1,6 @@
 <template>
     <div class="submitted">
-      <div class="background-image" :style="{ backgroundImage: `url(${currentImage})` }"></div>
+      <div class="background-image shake-image" :style="{ backgroundImage: `url(${currentImage})` }"></div>
     <h1 v-if="showMessage" class="message-header">{{ getMessageText() }}</h1>
     <div v-if="showMessage" class="back-button-container">
       <router-link to="/" class="back-button btn-circle-flat">時を戻す</router-link>
@@ -122,5 +122,16 @@ p {
 }
 .btn-circle-flat:hover {
   background: #E91E63;
+}
+.shake-image {
+  animation: shake 0.08s infinite alternate;
+}
+@keyframes shake {
+  from {
+    transform: translateY(-3px);
+  }
+  to {
+    transform: translateX(3px);
+  }
 }
 </style>
